@@ -6,7 +6,7 @@ branches: #어떤 브랜치
   only:
     - init
 
-# Travis CI 서버의 Home
+# Travis CI 서버
 cache:
   directories:
     - '$HOME/.m2/repository'
