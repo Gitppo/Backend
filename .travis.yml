@@ -13,6 +13,10 @@ cache:
     - '$HOME/.gradle'
 script: "./gradlew clean build" # 3.
 
+#gradlew 에러 해결
+before_install:
+  - chmod +x gradlew
+
 # CI 실행 완료 시 메일 알람
 notifications: # 4.
   email:
