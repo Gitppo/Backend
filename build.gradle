@@ -6,7 +6,7 @@ plugins {
 
 group = 'HYlikelion'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = '8'
 
 configurations {
 	compileOnly {
@@ -22,16 +22,26 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
 	compileOnly 'org.projectlombok:lombok'
-	runtimeOnly 'mysql:mysql-connector-java'
+	runtimeOnly 'mysql:mysql-connector-java:8.0.21'
 	annotationProcessor 'org.projectlombok:lombok'
+	implementation "io.springfox:springfox-boot-starter:3.0.0"
+
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
-	testImplementation 'org.springframework.security:spring-security-test'
+
+//	스프링 시큐리티 관련
+//	implementation 'org.springframework.boot:spring-boot-starter-security'
+//	testImplementation 'org.springframework.security:spring-security-test'
 }
 
 test {
 	useJUnitPlatform()
+}
+
+jar {
+	manifest {
+		attributes 'Main-Class': 'HYlikelion.gitppo.GitppoApplication'
+	}
 }
