@@ -1,4 +1,11 @@
 spring:
+  profiles:
+    active: local # 기본 환경 선택
+
+
+# local 환경
+---
+spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/Gitppo?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
@@ -17,4 +24,3 @@ logging:
   level:
     org.hibernate.SQL: debug  # 로거를 통해 JPA에서 자동으로 생성하는 쿼리를 보려고 할 때 출력
     org.hibernate.type: trace # SQL 로그 구체적인 value값 출력
-
