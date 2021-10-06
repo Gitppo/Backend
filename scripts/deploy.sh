@@ -1,6 +1,7 @@
 #!/bin/bash
 BASE_PATH=/home/ubuntu/app/Backend
 BUILD_PATH=$(ls $BASE_PATH/build/libs/*.jar)
+
 JAR_NAME=$(basename $BUILD_PATH)
 echo "> build 파일명: $JAR_NAME"
 
@@ -53,7 +54,7 @@ sleep 10
 
 for retry_count in {1..10}; do
   response=$(curl -s http://localhost:$IDLE_PORT/user/1)
-  up_count=$(echo $response | grep 'UP' | wc -l)
+  up_count=$(echo $response | grep '{"status":"OK","message":"고범석 찾기 성공","data":{"id":2,"name":"hi"}}' | wc -l)
 
   if [ $up_count -ge 1 ]; then # $up_count >= 1 ("UP" 문자열이 있는지 검증)
     echo "> Health check 성공"
@@ -75,4 +76,4 @@ done
 
 echo "> 스위칭"
 sleep 10
-/home/ec2-user/app/nonstop/switch.sh
+/home/ubuntu/app/Backend/scripts/switch.sh
