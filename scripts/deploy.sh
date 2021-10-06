@@ -1,6 +1,6 @@
 #!/bin/bash
 BASE_PATH=/home/ubuntu/app/Backend
-BUILD_PATH=$(ls $BASE_PATH/Backend/build/libs/*.jar)
+BUILD_PATH=$(ls $BASE_PATH/build/libs/*.jar)
 JAR_NAME=$(basename $BUILD_PATH)
 echo "> build 파일명: $JAR_NAME"
 
@@ -72,3 +72,7 @@ for retry_count in {1..10}; do
   echo "> Health check 연결 실패. 재시도..."
   sleep 10
 done
+
+echo "> 스위칭"
+sleep 10
+/home/ec2-user/app/nonstop/switch.sh
