@@ -19,8 +19,11 @@ script: "./gradlew clean build" # 3.
 #gradlew 에러 해결
 before_install:
   - chmod +x gradlew
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS gitppo;'
+  - sudo mysql -e "use mysql; update user set password=PASSWORD('1234') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
+  - sudo service mysql restart
 
+before_script:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS gitppo;'
 
 
 # CI 실행 완료 시 메일 알람
