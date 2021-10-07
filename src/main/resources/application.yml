@@ -6,22 +6,23 @@ spring:
 # local 환경
 ---
 spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/Gitppo?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
-    username: root
-    #    password: 1234
-    password:
-
-  jpa:
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    open-in-view: false
-    show-sql: true
-    hibernate:
-      format_sql: true
-      ddl-auto: create
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/Gitppo?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+#    username: root
+#    password: 1234
+#
+#  jpa:
+#    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+#    open-in-view: false
+#    show-sql: true
+#    hibernate:
+#      format_sql: true
+#      ddl-auto: create
 
 logging:
   level:
-    org.hibernate.SQL: debug  # 로거를 통해 JPA에서 자동으로 생성하는 쿼리를 보려고 할 때 출력
-    org.hibernate.type: trace # SQL 로그 구체적인 value값 출력
+#    org.hibernate.SQL: debug  # 로거를 통해 JPA에서 자동으로 생성하는 쿼리를 보려고 할 때 출력
+#    org.hibernate.type: trace # SQL 로그 구체적인 value값 출력
+    org.hibernate.stat: debug
+    org.hibernate.SQL: debug

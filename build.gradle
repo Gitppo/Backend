@@ -26,8 +26,10 @@ dependencies {
 	runtimeOnly 'mysql:mysql-connector-java:8.0.21'
 	annotationProcessor 'org.projectlombok:lombok'
 	implementation "io.springfox:springfox-boot-starter:3.0.0"
+    runtimeOnly 'com.h2database:h2'
 
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 
