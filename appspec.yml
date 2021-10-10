@@ -1,0 +1,11 @@
+# codedeploy 설정용 파일
+version: 0.0 # codedeploy의 버전
+os: linux
+files:
+  - source:  / # s3에서 복사할 파일의 위치
+    destination: /home/ubuntu/app/travis/build # zip파일을 복사해 파일을 풀 위치
+
+hooks:
+  AfterInstall: # 배포가 끝나면 아래 명령어를 실행
+    - location: execute-deploy.sh
+      timeout: 180
