@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestApiController {
 
     private final TestService testService;
+
     @GetMapping("/user/{id}")
     public ResponseEntity<TestDTO> findByid(@PathVariable Long id) {
         Test test = new Test("hi");
