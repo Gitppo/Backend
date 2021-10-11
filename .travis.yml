@@ -60,5 +60,5 @@ deploy:
 notifications:
   email:
     recipients:
-      - nmj5012@naver.com
       - hyunahshim@naver.com
+      - nmj5012@naver.com
