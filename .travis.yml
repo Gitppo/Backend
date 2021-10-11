@@ -4,12 +4,12 @@ jdk:
 
 branches: #어떤 브랜치
   only:
-    - init
+    - develop
 
 services:
   - mysql
 
-  # Travis CI 서버
+# Travis CI 서버
 cache:
   directories:
     - '$HOME/.m2/repository'
