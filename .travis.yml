@@ -1,0 +1,64 @@
+language: java
+jdk:
+  - openjdk8
+
+branches: #어떤 브랜치
+  only:
+    - develop
+
+services:
+  - mysql
+
+# Travis CI 서버
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.gradle'
+script: "./gradlew clean build" # 3.
+
+#gradlew 에러 해결
+#before_install:
+#  - chmod +x gradlew
+#  - mysql -u root -e 'CREATE DATABASE IF NOT EXISTS gitppo;'
+
+# 매번 travis ci에서 파일을 하나하나 복사하는 것은 오래걸리기 때문에 프로젝트 폴더 채로 압축해서 s3로 전달하도록 설정 추가
+before_deploy:
+  - zip -r gitppo * # 현재 위치의 모든 파일을 gitppo.zip이름으로 압축
+  - mkdir -p deploy # deploy라는 디렉토리를 travis ci가 실행중인 위치에 생성
+  - mv gitppo.zip deploy/gitppo.zip # gitppo.zip파일을 deploy/로 이동
+
+# travis가 빌드한 결과를 codedeploy가 가져갈 수 있도록 s3에 저장
+deploy:
+  - provider: s3
+    local_dir: deploy # before_deploy에서 생성한 디렉토리 -> 해당 디렉토리 내용들만 s3로 전송
+    access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
+    secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
+    bucket: gitppo-deploy # S3 버킷 이름
+    region: ap-northeast-2
+    skip_cleanup: true
+    acl: public_read
+    wait-until-deployed: true
+    on:
+      repo: Gitppo/Backend #Github 주소
+      branch: develop
+
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
+    secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
+    bucket: gitppo-deploy # S3 버킷
+    key: gitppo.zip # 빌드 파일을 압축해서 전달
+    bundle_type: zip
+    application: gitppo # 웹 콘솔에서 등록한 CodeDeploy 어플리케이션
+    deployment_group: gitppo-group # 웹 콘솔에서 등록한 CodeDeploy 배포 그룹
+    region: ap-northeast-2
+    wait-until-deployed: true
+    on:
+      repo: Gitppo/Backend
+      branch: develop
+
+# CI 실행 완료 시 메일 알람
+notifications:
+  email:
+    recipients:
+      - hyunahshim@naver.com
+      - nmj5012@naver.com

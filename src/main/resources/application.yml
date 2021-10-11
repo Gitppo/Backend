@@ -1,0 +1,34 @@
+spring:
+  profiles:
+    active: local # 기본 환경 선택
+
+
+# local 환경
+---
+spring:
+  profiles: local
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+#    schema: classpath*:db/hsqldb/schema.sql
+#    data: classpath*:db/hsqldb/data.sql
+
+  jpa:
+    show_spl: true
+    hibernate:
+      ddl-auto: create-drop # 서버 시작에 모든 테이블 생성, 서버 종료에 테이블 삭제
+      properties:
+        hibernate:
+          format_sql: true # 압축된 쿼리를 읽기 좋게 포맷
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug # 로그 형식으로 쿼리 보여주기
