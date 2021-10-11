@@ -21,6 +21,11 @@ public class TestApiController {
 
     private final TestService testService;
 
+    @GetMapping("/")
+    public String test() {
+        return "<div>hi</div>";
+    }
+
     @GetMapping("/user/{id}")
     public ResponseEntity<TestDTO> findByid(@PathVariable Long id) {
         Test test = new Test("hi");
