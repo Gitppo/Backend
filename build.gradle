@@ -20,11 +20,11 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'mysql:mysql-connector-java:8.0.21'
 	annotationProcessor 'org.projectlombok:lombok'
+	implementation 'mysql:mysql-connector-java'
 	implementation "io.springfox:springfox-boot-starter:3.0.0"
     runtimeOnly 'com.h2database:h2'
 
