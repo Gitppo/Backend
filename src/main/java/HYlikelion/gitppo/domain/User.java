@@ -8,26 +8,33 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Version;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 
 @Entity
-@Table(name="user")
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO) // 이 id 값 생성을 db에 넘김 (auto: mysql인 경우에만)
     private long usr_id;
 
     @Column(nullable = false)
-    private String usr_token;
+    private String userToken;
 
-    @Column(length=10, nullable = false)
+    @Column(length = 10, nullable = false)
     private String usr_name;
 
     @Column(nullable = false)
     private LocalDate usr_birth;
 
-    @Column(length=20, nullable = false)
+    @Column(length = 20, nullable = false)
     private String usr_phone;
 
     @Column(nullable = false)
